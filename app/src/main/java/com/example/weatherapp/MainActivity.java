@@ -59,7 +59,6 @@ public class MainActivity extends AppCompatActivity {
                             buildLocationCallback();
 
                             if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
                                 return;
                             }
                             fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(MainActivity.this);
@@ -105,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(TodayWeatherFragment.getInstance(), "СЕГОДНЯ");
         adapter.addFragment(ForecastFragment.getInstance(), "5 ДНЕЙ");
+        adapter.addFragment(CityFragment.getInstance(), "ПО ГОРОДУ");
         viewPager.setAdapter(adapter);
     }
-
 }
