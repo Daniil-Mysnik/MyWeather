@@ -1,7 +1,5 @@
 package com.example.weatherapp;
 
-
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -51,8 +49,7 @@ public class CityFragment extends Fragment {
     ImageView img_weather;
     TextView txt_city_name, txt_humidity, txt_sunrise,
             txt_sunset, txt_pressure, txt_temperature,
-            txt_description, txt_date_time, txt_wind,
-            txt_geo_coord;
+            txt_description, txt_date_time, txt_wind;
     LinearLayout weather_panel;
     ProgressBar loading;
 
@@ -78,8 +75,7 @@ public class CityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View itemView  = inflater.inflate(R.layout.fragment_city, container, false);
+         View itemView  = inflater.inflate(R.layout.fragment_city, container, false);
 
         img_weather = (ImageView)itemView.findViewById(R.id.img_weather);
 
@@ -92,16 +88,13 @@ public class CityFragment extends Fragment {
         txt_description = (TextView)itemView.findViewById(R.id.txt_description);
         txt_date_time = (TextView)itemView.findViewById(R.id.txt_date_time);
         txt_wind = (TextView)itemView.findViewById(R.id.txt_wind);
-        txt_geo_coord = (TextView)itemView.findViewById(R.id.txt_geo_coord);
 
         weather_panel = (LinearLayout)itemView.findViewById(R.id.weather_panel);
         loading = (ProgressBar) itemView.findViewById(R.id.loading);
 
-        // Membaca input dari searchBar
         searchBar = (MaterialSearchBar)itemView.findViewById(R.id.searchBar);
         searchBar.setEnabled(false);
 
-        // Async task untuk membaca data kota
         new LoadCities().execute();
 
         return itemView;
@@ -178,10 +171,8 @@ public class CityFragment extends Fragment {
                 }
             });
 
-            // Mengeset suggestion
             searchBar.setLastSuggestions(strings);
 
-            // Mengeset komponen yang ditampilkan
             loading.setVisibility(View.GONE);
             weather_panel.setVisibility(View.VISIBLE);
         }
@@ -191,39 +182,36 @@ public class CityFragment extends Fragment {
     private void getWeatherInformation(String cityName) {
         compositeDisposable.add(mService.getWeatherByCityName(cityName,
                 Common.APP_ID,
-                "metric"
+                Unit.getUnit()
                 )
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Consumer<WeatherResult>() {
                             @Override
                             public void accept(WeatherResult weatherResult) throws Exception {
-                                // Load image
+
                                 Picasso.get().load(new StringBuilder("https://openweathermap.org/img/w/")
                                         .append(weatherResult.getWeather().get(0).getIcon())
                                         .append(".png").toString()).into(img_weather);
 
                                 txt_city_name.setText(weatherResult.getName());
-                                txt_description.setText(new StringBuilder("Weather in ")
+                                txt_description.setText(new StringBuilder("Погода в ")
                                         .append(weatherResult.getName()).toString());
                                 txt_temperature.setText(new StringBuilder(
-                                        String.valueOf(weatherResult.getMain().getTemp())).append("°C").toString());
+                                        String.valueOf(weatherResult.getMain().getTemp())).append(Unit.getUnitStr()).toString());
                                 txt_date_time.setText(Common.convertUnixToDate(weatherResult.getDt()));
-                                txt_pressure.setText(new StringBuilder(String.valueOf(weatherResult.getMain().getPressure())).append(" hpa").toString());
+                                txt_pressure.setText(new StringBuilder(String.valueOf(weatherResult.getMain().getPressure()*0.75)).append(" мм рт.ст").toString());
                                 txt_humidity.setText(new StringBuilder(String.valueOf(weatherResult.getMain().getHumidity())).append(" %").toString());
                                 txt_sunrise.setText(Common.convertUnixToHour(weatherResult.getSys().getSunrise()));
                                 txt_sunset.setText(Common.convertUnixToHour(weatherResult.getSys().getSunset()));
-                                txt_geo_coord.setText(new StringBuilder("[").append(weatherResult.getCoord().toString()).append("]").toString());
-                                txt_wind.setText(new StringBuilder("Speed: ")
-                                        .append(String.valueOf(weatherResult.getWind().getSpeed()))
-                                        .append(" Deg: ")
-                                        .append(String.valueOf(weatherResult.getWind().getDeg()))
+                                txt_wind.setText(new StringBuilder("Скорость: ")
+                                        .append(Unit.getWind(weatherResult.getWind().getSpeed()))
+                                        .append(" м/с ")
                                         .toString());
-                                txt_pressure.setText(new StringBuilder(String.valueOf(weatherResult.getMain().getPressure()))
-                                        .append(" hpa.")
+                                txt_pressure.setText(new StringBuilder(String.valueOf(weatherResult.getMain().getPressure()*0.75))
+                                        .append(" мм рт.ст")
                                         .toString());
 
-                                // Display panel
                                 weather_panel.setVisibility(View.VISIBLE);
                                 loading.setVisibility(View.GONE);
 

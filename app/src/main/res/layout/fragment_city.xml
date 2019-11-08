@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".CityFragment">
 
     <com.mancj.materialsearchbar.MaterialSearchBar
-        style="@style/MaterialSearchBarLight"
-        app:mt_hint="City name"
-        app:mt_speechMode="false"
         android:id="@+id/searchBar"
+        style="@style/MaterialSearchBarLight"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        ></com.mancj.materialsearchbar.MaterialSearchBar>
+        app:mt_hint="City name"
+        app:mt_speechMode="false"></com.mancj.materialsearchbar.MaterialSearchBar>
 
     <FrameLayout
-        android:layout_marginTop="16dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp">
 
         <LinearLayout
             android:id="@+id/weather_panel"
@@ -35,9 +34,9 @@
                 android:id="@+id/txt_city_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cuaca di Sukolilo"
+                android:text="Выберите город!"
                 android:textColor="@color/colorPrimary"
-                android:textSize="24sp"
+                android:textSize="30sp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -47,15 +46,15 @@
 
                 <ImageView
                     android:id="@+id/img_weather"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@mipmap/ic_launcher" />
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/map" />
 
                 <TextView
                     android:id="@+id/txt_temperature"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="14 C"
+
                     android:textColor="@color/colorPrimary"
                     android:textSize="50sp"
                     android:textStyle="bold" />
@@ -65,7 +64,7 @@
                 android:id="@+id/txt_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cuaca di Sukolilo"
+
                 android:textColor="@color/colorPrimary"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -74,7 +73,7 @@
                 android:id="@+id/txt_date_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tanggal Sekarang"
+
                 android:textColor="@color/colorPrimary"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -95,7 +94,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/cell"
-                        android:text="Wind" />
+                        android:text="Ветер" />
 
                     <TextView
                         android:id="@+id/txt_wind"
@@ -103,7 +102,7 @@
                         android:layout_height="wrap_content"
                         android:layout_column="1"
                         android:layout_marginLeft="8dp"
-                        android:text="Speed: 1 Deg: 1" />
+                        android:text="---" />
                 </TableRow>
 
                 <TableRow
@@ -114,7 +113,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/cell"
-                        android:text="Pressure" />
+                        android:text="Давление" />
 
                     <TextView
                         android:id="@+id/txt_pressure"
@@ -122,7 +121,7 @@
                         android:layout_height="wrap_content"
                         android:layout_column="1"
                         android:layout_marginLeft="8dp"
-                        android:text="1000.23 hpa" />
+                        android:text="---" />
                 </TableRow>
 
                 <TableRow
@@ -133,7 +132,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/cell"
-                        android:text="Humidity" />
+                        android:text="Влажность" />
 
                     <TextView
                         android:id="@+id/txt_humidity"
@@ -141,7 +140,7 @@
                         android:layout_height="wrap_content"
                         android:layout_column="1"
                         android:layout_marginLeft="8dp"
-                        android:text="100 %" />
+                        android:text="---" />
 
                 </TableRow>
 
@@ -154,7 +153,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/cell"
-                        android:text="Sunrise" />
+                        android:text="Рассвет" />
 
                     <TextView
                         android:id="@+id/txt_sunrise"
@@ -162,7 +161,7 @@
                         android:layout_height="wrap_content"
                         android:layout_column="1"
                         android:layout_marginLeft="8dp"
-                        android:text="05.30 AM" />
+                        android:text="---" />
                 </TableRow>
 
                 <TableRow
@@ -173,7 +172,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/cell"
-                        android:text="Sunset" />
+                        android:text="Закат" />
 
                     <TextView
                         android:id="@+id/txt_sunset"
@@ -181,27 +180,7 @@
                         android:layout_height="wrap_content"
                         android:layout_column="1"
                         android:layout_marginLeft="8dp"
-                        android:text="05.30 PM" />
-
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/cell"
-                        android:text="Geo coordinate" />
-
-                    <TextView
-                        android:id="@+id/txt_geo_coord"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="1"
-                        android:layout_marginLeft="8dp"
-                        android:text="[-123, 456]" />
+                        android:text="---" />
 
                 </TableRow>
             </TableLayout>
@@ -210,11 +189,11 @@
 
         <ProgressBar
             android:id="@+id/loading"
-            android:indeterminate="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_gravity="center_horizontal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:indeterminate="true" />
 
     </FrameLayout>
 

@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
     tools:context=".TodayWeatherFragment">
 
     <LinearLayout
@@ -20,7 +18,7 @@
             android:id="@+id/txt_city_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="fsfsfs"
+            android:text="Cuaca di Sukolilo"
             android:textColor="@color/colorPrimary"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -40,7 +38,7 @@
                 android:id="@+id/txt_temperature"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="5 C"
+                android:text="14 C"
                 android:textColor="@color/colorPrimary"
                 android:textSize="50sp"
                 android:textStyle="bold" />
@@ -50,7 +48,7 @@
             android:id="@+id/txt_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="fsfsdfsfs"
+            android:text="Cuaca di Sukolilo"
             android:textColor="@color/colorPrimary"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -59,7 +57,7 @@
             android:id="@+id/txt_date_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="fsdfsdfs"
+            android:text="Tanggal Sekarang"
             android:textColor="@color/colorPrimary"
             android:textSize="18sp"
             android:textStyle="bold" />
@@ -80,7 +78,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/cell"
-                    android:text="Wind" />
+                    android:text="Ветер" />
 
                 <TextView
                     android:id="@+id/txt_wind"
@@ -88,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_column="1"
                     android:layout_marginLeft="8dp"
-                    android:text="Speed: 1" />
+                    android:text="Speed: 1 Deg: 1" />
             </TableRow>
 
             <TableRow
@@ -99,7 +97,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/cell"
-                    android:text="Pressure" />
+                    android:text="Давление" />
 
                 <TextView
                     android:id="@+id/txt_pressure"
@@ -107,7 +105,7 @@
                     android:layout_height="wrap_content"
                     android:layout_column="1"
                     android:layout_marginLeft="8dp"
-                    android:text="742" />
+                    android:text="1000.23 hpa" />
             </TableRow>
 
             <TableRow
@@ -117,7 +115,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/cell"
-                    android:text="Humidity" />
+                    android:text="Влажность" />
 
                 <TextView
                     android:id="@+id/txt_humidity"
@@ -137,7 +135,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/cell"
-                    android:text="Sunrise" />
+                    android:text="Рассвет" />
 
                 <TextView
                     android:id="@+id/txt_sunrise"
@@ -155,7 +153,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/cell"
-                    android:text="Sunset" />
+                    android:text="Закат" />
 
                 <TextView
                     android:id="@+id/txt_sunset"
@@ -167,24 +165,6 @@
 
             </TableRow>
 
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/cell"
-                    android:text="Geo coordinate" />
-
-                <TextView
-                    android:id="@+id/txt_geo_coord"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_column="1"
-                    android:layout_marginLeft="8dp"
-                    android:text="[-123, 456]" />
-
-            </TableRow>
         </TableLayout>
 
     </LinearLayout>
@@ -195,4 +175,5 @@
         android:layout_centerInParent="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
 </RelativeLayout>

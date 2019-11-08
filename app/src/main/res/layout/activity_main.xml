@@ -8,32 +8,47 @@
     tools:context=".MainActivity">
 
     <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#60C99C"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/colorPrimary"
+            android:background="#60C99C"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-        </android.support.v7.widget.Toolbar>
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"></android.support.v7.widget.Toolbar>
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tabMode="fixed"
-            app:tabGravity="fill"></android.support.design.widget.TabLayout>
+            app:tabGravity="fill"
+            app:tabIndicatorColor="#60C99C"
+            app:tabMode="fixed"></android.support.design.widget.TabLayout>
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="109dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="250dp"
+            android:layout_marginTop="5dp"
+            android:checked="false"
+            android:cursorVisible="true"
+            android:switchMinWidth="55dp"
+            android:textOff="°C"
+            android:textOn="°F" />
 
     </android.support.design.widget.AppBarLayout>
-    
+
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></android.support.v4.view.ViewPager>
+        android:layout_height="match_parent"
+        android:background="#FFFFFF"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"></android.support.v4.view.ViewPager>
 
 </android.support.design.widget.CoordinatorLayout>

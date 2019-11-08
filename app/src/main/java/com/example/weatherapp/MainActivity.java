@@ -11,6 +11,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.Switch;
+import android.widget.Toast;
 
 import com.example.weatherapp.adapter.ViewPagerAdapter;
 import com.example.weatherapp.common.Common;
@@ -43,6 +46,27 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        final Switch sw1 = (Switch) findViewById(R.id.switch1);
+        sw1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String str1;
+                if (sw1.isChecked()) {
+                    str1 = sw1.getTextOn().toString();
+                    Unit.setUnitParameter(1);
+                    viewPager = (ViewPager)findViewById(R.id.view_pager);
+                    setupViewPager(viewPager);
+                }
+                else {
+                    str1 = sw1.getTextOff().toString();
+                    Unit.setUnitParameter(0);
+                    viewPager = (ViewPager)findViewById(R.id.view_pager);
+                    setupViewPager(viewPager);
+                }
+                Toast.makeText(getApplicationContext(), "Единицы измерения - " + str1, Toast.LENGTH_SHORT).show();
+                buildLocationRequest();
+            }
+        });
 
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.root_view);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -59,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
                             buildLocationCallback();
 
                             if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+
                                 return;
                             }
                             fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(MainActivity.this);

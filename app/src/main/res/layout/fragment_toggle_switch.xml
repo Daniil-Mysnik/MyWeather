@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity">
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="120dp"
+        android:checked="true"
+        android:switchMinWidth="56dp"
+        android:textColor="#3F6823"
+        android:textColorHighlight="#3F6823"
+        android:textColorHint="#3F6823"
+        android:textColorLink="#179B0D"
+        android:textCursorDrawable="@color/colorAccent"
+        android:textOff="OFF"
+        android:textOn="ON" />
+
+</android.support.design.widget.CoordinatorLayout>

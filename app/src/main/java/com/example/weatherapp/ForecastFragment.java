@@ -1,6 +1,5 @@
 package com.example.weatherapp;
 
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -18,24 +17,13 @@ import com.example.weatherapp.model.WeatherForecastResult;
 import com.example.weatherapp.retrofit.IOpenWeatherMap;
 import com.example.weatherapp.retrofit.RetrofitClient;
 
-import org.w3c.dom.Text;
 
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ForecastFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ForecastFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ForecastFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
@@ -43,7 +31,7 @@ public class ForecastFragment extends Fragment {
     CompositeDisposable compositeDisposable;
     IOpenWeatherMap mService;
 
-    TextView txt_city_name, txt_geo_coord;
+    TextView txt_city_name;
     RecyclerView recycler_forecast;
 
     static ForecastFragment instance;
@@ -63,21 +51,19 @@ public class ForecastFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View itemView = inflater.inflate(R.layout.fragment_forecast, container, false);
 
         txt_city_name = (TextView) itemView.findViewById(R.id.txt_city_name);
-        txt_geo_coord = (TextView) itemView.findViewById(R.id.txt_geo_coord);
 
         recycler_forecast = (RecyclerView) itemView.findViewById(R.id.recycler_forecast);
         recycler_forecast.setHasFixedSize(true);
-        recycler_forecast.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL,false));
+        recycler_forecast.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false));
 
         getForecastWeatherInformation();
 
@@ -96,7 +82,7 @@ public class ForecastFragment extends Fragment {
                 String.valueOf(Common.current_location.getLatitude()),
                 String.valueOf(Common.current_location.getLongitude()),
                 Common.APP_ID,
-                "metric")
+                Unit.getUnit())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<WeatherForecastResult>() {
@@ -114,14 +100,11 @@ public class ForecastFragment extends Fragment {
     }
 
     private void displayForecastWeather(WeatherForecastResult weatherForecastResult) {
-        txt_city_name.setText(new StringBuilder(weatherForecastResult.city.name));
-        txt_geo_coord.setText(new StringBuilder(weatherForecastResult.city.coord.toString()));
-
+        txt_city_name.setText(new StringBuilder("Омск"));
         WeatherForecastAdapter adapter = new WeatherForecastAdapter(getContext(), weatherForecastResult);
         recycler_forecast.setAdapter(adapter);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -139,7 +122,6 @@ public class ForecastFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }

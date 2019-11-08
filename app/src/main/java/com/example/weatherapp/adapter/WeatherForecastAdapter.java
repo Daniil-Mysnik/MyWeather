@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.weatherapp.R;
+import com.example.weatherapp.Unit;
 import com.example.weatherapp.common.Common;
 import com.example.weatherapp.model.WeatherForecastResult;
 import com.squareup.picasso.Picasso;
@@ -34,13 +35,14 @@ public class WeatherForecastAdapter extends RecyclerView.Adapter<WeatherForecast
 
     @Override
     public void onBindViewHolder(@NonNull WeatherForecastAdapter.MyViewHolder holder, int position) {
+
         Picasso.get().load(new StringBuilder("https://openweathermap.org/img/w/")
                 .append(weatherForecastResult.list.get(position).weather.get(0).getIcon())
                 .append(".png").toString()).into(holder.img_weather);
 
         holder.txt_date_time.setText(new StringBuilder(Common.convertUnixToDate(weatherForecastResult.list.get(position).dt)));
         holder.txt_description.setText(new StringBuilder(weatherForecastResult.list.get(position).weather.get(0).getDescription()));
-        holder.txt_temperature.setText(new StringBuilder(String.valueOf(weatherForecastResult.list.get(position).main.getTemp())).append("°C"));
+        holder.txt_temperature.setText(new StringBuilder(String.valueOf(weatherForecastResult.list.get(position).main.getTemp())).append(Unit.getUnitStr()));
     }
 
     @Override

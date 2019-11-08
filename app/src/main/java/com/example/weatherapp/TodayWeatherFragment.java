@@ -33,8 +33,7 @@ public class TodayWeatherFragment extends Fragment {
     ImageView img_weather;
     TextView txt_city_name, txt_humidity, txt_sunrise,
             txt_sunset, txt_pressure, txt_temperature,
-            txt_description, txt_date_time, txt_wind,
-            txt_geo_coord;
+            txt_description, txt_date_time, txt_wind;
     LinearLayout weather_panel;
     ProgressBar loading;
 
@@ -72,7 +71,6 @@ public class TodayWeatherFragment extends Fragment {
         txt_description = (TextView)itemView.findViewById(R.id.txt_description);
         txt_date_time = (TextView)itemView.findViewById(R.id.txt_date_time);
         txt_wind = (TextView)itemView.findViewById(R.id.txt_wind);
-        txt_geo_coord = (TextView)itemView.findViewById(R.id.txt_geo_coord);
 
         weather_panel = (LinearLayout)itemView.findViewById(R.id.weather_panel);
         loading = (ProgressBar) itemView.findViewById(R.id.loading);
@@ -87,7 +85,7 @@ public class TodayWeatherFragment extends Fragment {
                 String.valueOf(Common.current_location.getLatitude()),
                 String.valueOf(Common.current_location.getLongitude()),
                 Common.APP_ID,
-                "metric"
+                Unit.getUnit()
                 )
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
@@ -99,27 +97,23 @@ public class TodayWeatherFragment extends Fragment {
                                         .append(weatherResult.getWeather().get(0).getIcon())
                                         .append(".png").toString()).into(img_weather);
 
-                                txt_city_name.setText(weatherResult.getName());
-                                txt_description.setText(new StringBuilder("Weather in ")
-                                        .append(weatherResult.getName()).toString());
+                                txt_city_name.setText("Омск");
+                                txt_description.setText(new StringBuilder("Погода в Омске"));
                                 txt_temperature.setText(new StringBuilder(
-                                        String.valueOf(weatherResult.getMain().getTemp())).append("°C").toString());
+                                        String.valueOf(weatherResult.getMain().getTemp())).append(Unit.getUnitStr()).toString());
                                 txt_date_time.setText(Common.convertUnixToDate(weatherResult.getDt()));
-                                txt_pressure.setText(new StringBuilder(String.valueOf(weatherResult.getMain().getPressure())).append(" hpa").toString());
+                                txt_pressure.setText(new StringBuilder(String.valueOf(weatherResult.getMain().getPressure()*0.75)).append(" мм рт.ст").toString());
                                 txt_humidity.setText(new StringBuilder(String.valueOf(weatherResult.getMain().getHumidity())).append(" %").toString());
                                 txt_sunrise.setText(Common.convertUnixToHour(weatherResult.getSys().getSunrise()));
                                 txt_sunset.setText(Common.convertUnixToHour(weatherResult.getSys().getSunset()));
-                                txt_geo_coord.setText(new StringBuilder("[").append(weatherResult.getCoord().toString()).append("]").toString());
-                                txt_wind.setText(new StringBuilder("Speed: ")
-                                        .append(String.valueOf(weatherResult.getWind().getSpeed()))
-                                        .append(" Deg: ")
-                                        .append(String.valueOf(weatherResult.getWind().getDeg()))
+                                txt_wind.setText(new StringBuilder("Скорость: ")
+                                        .append(Unit.getWind(weatherResult.getWind().getSpeed()))
+                                        .append(" м/с")
                                         .toString());
-                                txt_pressure.setText(new StringBuilder(String.valueOf(weatherResult.getMain().getPressure()))
-                                        .append(" hpa.")
+                                txt_pressure.setText(new StringBuilder(String.valueOf(weatherResult.getMain().getPressure()*0.75))
+                                        .append(" мм рт.ст")
                                         .toString());
 
-                                // Display panel
                                 weather_panel.setVisibility(View.VISIBLE);
                                 loading.setVisibility(View.GONE);
                             }
